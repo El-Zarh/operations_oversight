@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance_report Forms</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/forms.css">
+    <script src="./scripts/main.js" async></script>
+</head>
+<body>
+    <div class ="form-container">
+        <div class ="form-header">
+            <h1>Monthly Attendance Report</h1>
+            <h3><span>AMF</span> Site Operations</h3>
+        </div>
+        <div class ="form">
+            <p><span>&ast;</span>Required</p>
+          <form id ="attendance-report">
+              <fieldset>
+                  <legend>Attendance</legend>
+                  <h4>Site Staff & Attendance Details</h4>
+                  <h4>INSTRUCTION: Please select your answer by clicking on the correct checkbox.</h4>
+
+                  <label for ="employees-number"><em>1.</em>Total Number of Staffs</label>
+                  <input type ="text" id ="employees-number" name ="employees-number">
+                  
+                  <div>
+                    <label for ="electrical"><em>2.</em>Availability of Electrical</label>
+                    <input type="radio" name="elect" value="yes" id="electrical"> 
+                    <label for="choice-yes">Yes</label>
+                    <input type="radio" name="elect" value="no" id="electrical">
+                    <label for="choice-no">No</label>
+                    <input type="radio" name="elect" value="na" id="electrical">
+                    <label for="choice-no">N/A</label>
+                  </div>
+                  <br>
+                  <div>
+                    <label for ="plumber"><em>3.</em>Availability of plumbing</label>
+                    <input type="radio" name="plumber" value="yes" id="plumbing"> 
+                    <label for="choice-yes">Yes</label>
+                    <input type="radio" name="plumber" value="no" id="plumbing">
+                    <label for="choice-no">No</label>
+                    <input type="radio" name="plumber" value="na" id="plumbing">
+                    <label for="choice-no">N/A</label>
+                  </div> 
+                  <br>
+                  <div>
+                    <label for ="hvac"><em>4.</em>Availability of HVAC Tech</label>
+                    <input type="radio" name="hv" value="yes" id="hvac"> 
+                    <label for="choice-yes">Yes</label>
+                    <input type="radio" name="hv" value="no" id="hvac">
+                    <label for="choice-no">No</label>
+                    <input type="radio" name="hv" value="na" id="hvac">
+                    <label for="choice-no">N/A</label>
+                  </div>            
+                  <br>
+                  <div>
+                    <label for ="cleaners"><em>5.</em>Availability of Cleaning/Janitorial Staff</label>
+                    <input type="radio" name="clean" value="yes" id="janitors"> 
+                    <label for="choice-yes">Yes</label>
+                    <input type="radio" name="clean" value="no" id="janitors">
+                    <label for="choice-no">No</label>
+                    <input type="radio" name="clean" value="na" id="janitors">
+                    <label for="choice-no">N/A</label>
+                  </div> 
+                  <br>
+                  <div>
+                    <label for ="absentees"><em>6.</em>Any Absentism?</label>
+                    <input type="radio" name="absent" value="yes" id="absent"> 
+                    <label for="choice-yes">Yes</label>
+                    <input type="radio" name="absent" value="no" id="absent">
+                    <label for="choice-no">No</label>
+                    <input type="radio" name="absent" value="na" id="absent">
+                    <label for="choice-no">N/A</label>
+                  </div>
+                 <br>
+                  <label for ="absentees-names"><em>7.</em>List of Names of absentees</label>
+                  <input type ="text" id ="absentees-names" placeholder="Enter your answer">  
+                    <br>
+                    <input type = "submit" value = "Submit Form" id ="btn-submit">
+                </fieldset> 
+                </form> 
+
+                <div class ="form-footer">
+                    <div class ="footer-btn">
+                        <input type ="button" name ="next" value ="Next">
+                    </div>
+                    <div class ="footer-progressbar">
+                        
+                    </div>
+                </div>      
+            </div>       
+        </div>
+        
+    <div class ="footer-info">
+        <p>  This content is created by the owner of the form. The data you submit will be sent to the form owner. Microsoft is not responsible for the privacy or security practices of its customers, including those of this form owner.
+             Never give out your password.<br>Powered by Microsoft Forms | The owner of this form has not provided a privacy statement as to how they will use your response data. 
+             Do not provide personal or sensitive information. <br> <a href ="#">Terms of use</a></p>
+    </div>
+    <pre id ="log">
+
+    </pre>
+    
+  <script>
+      const form = document.getElementById('attendance-report');
+
+      form.addEventListener('submit', sendReport);
+
+      async function sendReport(event){
+          event.preventDefault();
+
+          const employees = document.getElementById('employees-number').value;
+          const electrical = document.getElementById('electrical').value;
+          const plumbing = document.getElementById('plumbing').value;
+          const hvac = document.getElementById('hvac').value;
+          const janitors = document.getElementById('janitors').value;
+          const absent = document.getElementById('absent').value;
+          const absentees = document.getElementById('absentees-names').value;
+          
+
+         const result = await fetch('/api/attendance', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  employees,
+                  electrical,
+                  plumbing,
+                  hvac,
+                  janitors,
+                  absent,
+                  absentees
+              })
+          }).then((res) => res.json());
+          console.log(result);
+      }
+          
+  </script>
+</body>
+</html>

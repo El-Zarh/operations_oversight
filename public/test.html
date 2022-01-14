@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Operation Admin</title>
+
+    <style>   
+        body{ margin: 0; top: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        .admin-container{ max-width: 1300px; height: auto; display: flex; box-sizing: border-box; flex-direction: column;
+        margin: auto;  background: none; position: relative;}
+        .top-nav{ width: 100%; height: 50px; background-color: #333; border-radius: 5px; position: absolute;}
+        .row{ display: flex; width: 100%; align-items: center; flex-wrap: wrap; justify-content: space-around; background: 
+            linear-gradient(#363945, #3d3e41); margin-top: 60px; border-radius: 5px; position: absolute;}
+        .col-2{ flex: 1; flex-basis: 60%; max-width: 860px; margin-bottom: 30px; margin-left: 20px; }
+        .col-3{ flex: 1; flex-basis: 20%; max-width: 250px;  margin-bottom: 30px; }
+        .col-3 #report-call{ flex-direction: column; height: 70%; background-color: #fff; line-height: 50px; 
+            border: 1px solid #333; position: absolute; top: 20px;  width: 20%; border-radius: 5px; }
+        .col-3 #admin-tools{ height: 44%; border: 1px solid #333; position: absolute; top: 20px;  width: 18%; 
+            border-radius: 5px; background-color: #fff; line-height: 50px; right: 0;}
+        input[type=text], input[type=submit]{ width: 100%; height: 35px;}
+        input[type=submit]{ cursor: pointer; outline: none;}
+        
+        #db-container{ max-width: 800px; height: 60%; border-radius: 5px; background-color: #fff; top: 10px;
+             overflow-wrap: break-word; margin-left: 2px;}
+        .top-nav{  text-align: right; }
+        .top-nav #add-user{ margin-top: 8px; margin-right: 5px; padding: 6px; background-color: #fcbb2f; color: #fff; 
+            text-transform: uppercase; cursor: pointer; border-radius: 5px; }
+        .top-nav #add-user:hover{ background-color: #cea862; }
+        .footer-container{ max-width: 1300px; height: 150px; display: flex; box-sizing: border-box; flex-direction: row;
+        margin: 55px 25px;  background-color: #333; border-radius: 5px;}
+  
+        .form-popup { display: none; position: absolute; top: 20px; margin-left: 41%; border: 3px solid #f1f1f1; z-index: 9;
+        border: none; }
+        .form-container { max-width: 250px; padding: 10px; background-color: #fff; margin-right: 5px; border-radius: 5px; }
+        .form-container input[type=text], .form-container input[type=password] { width: 100%; height: 40px; margin: 5px 0 22px 0;
+         background: #f1f1f1; border: 1px solid #cecaca;}
+        .form-container h1{ text-align: center; }
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {background-color: #ddd;
+        outline: none;}
+        .form-container .btn{ background-color: #04a96d; color: #fff; padding: 16px 20px; border: none; cursor: pointer;
+        width: 100%; margin-bottom:10px; opacity: 0.8; font-size: 15px; box-shadow: -3px -3px 7px #cac9c9cc,
+              3px 3px 5px rgba(94, 104, 121, 0.342);}
+        .form-container .register{ height: 45px; border-radius: 5px; }
+        .form-container .cancel { background-color: #ff0000; border-radius: 5px; height: 45px; box-shadow: -3px -3px 7px #cac9c9cc,
+              3px 3px 5px rgba(94, 104, 121, 0.342);}
+        .form-container .btn:hover, .open-button:hover { opacity: 1;}
+
+       .col-2 #buttons{ margin: 10px;text-align: center;}
+       .col-2 #buttons button{ color: #000; padding: 8px 10px; font-size: 16px;}
+       .col-2 #buttons button:hover{ background-color: #d5d5d5}
+       .col-2 #buttons button:focus{ background-color: rgb(101, 169, 246);}
+    </style>
+    
+</head>
+<body>
+    <div class = "admin-container">
+
+        <div class = "top-nav">
+            
+        </div>
+
+        <div class ="row">
+            <div class = "col-3">
+                <div class ="report-aside" id ="report-call">
+                    <div>
+                        <input type ="submit" value ="Power Report" onclick ="getPowerReport();">
+                    </div>
+                    <div> 
+                        <input type ="submit" value ="Attendance Report">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="Operations Report">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="Service Request">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="HSE/UACN">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="Operating Expenses">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="Critical Systems">
+                    </div>
+                    <div>
+                        <input type ="submit" value ="Waste Collection/Disposal">
+                    </div>
+                    
+                </div>
+            </div>
+  <!---------------Begening of Container for displaying data from database----------------->
+            <div class = "col-2">
+                <pre 
+                id ="db-container">
+
+               <!---- <a href = "javascript: prevPage()" id ="btn_prev">Prev</a>
+                <a href = "javascript: nextPage()" id ="btn_next">Next</a>-->
+                </pre>  
+                <section id = "buttons"></section>
+            </div>
+  <!---------------End of Container for displaying data from database--------------------->
+
+  <div class = "col-3">
+    <div class ="report-aside" id ="admin-tools">
+        <div>
+            <input type ="submit" class="open-button" onclick="openForm()" value ="Add User">
+        </div>
+        <div> 
+            <input type ="submit" id ="update-user" value ="Update User">
+        </div>
+        <div>
+            <input type ="submit" id ="delete" value ="Delete Data">
+        </div>
+        <div>
+            <input type ="submit" id ="slide" value ="Change Slide">
+        </div>
+        <div>
+            <input type ="submit" id ="news" value ="News Post">
+        </div>  
+    </div>
+</div>
+     <div class = "col-3">
+        <div class="form-popup" id="myForm">
+            <form class="form-container" id ="reg-form">
+            <h1>Register</h1>
+        
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email"id ="user-email" name="email" required>
+
+            <label for="user role"><b>User Role</b></label>
+            <input type="text" placeholder="Enter User role" id ="user-role" name="user-role" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id= "password" name="password" required>
+        
+            <input type="submit" value ="Register" class="btn register">
+            <input type="button" value ="Close" class="btn cancel" onclick="closeForm()">
+            </form>
+        </div>
+     </div>  
+  </div>   
+</div>
+    
+    <script> 
+    /*--Put logic to alternate what is displayed on db container here
+    For instance: whether to display power or attendance reports--*/
+  
+    //Function for getting generator report from database 
+        let getPowerReport = async() => {
+            const res = await fetch ('/power');
+
+            const data = await res.json();
+
+            console.log(data);
+            const dbContainer = document.getElementById('db-container');
+
+            dbContainer.innerHTML += JSON.stringify(data, null, 2);
+        };
+
+        let getAttendance = async() => {
+            const res = await fetch ('/attendance');
+
+            const data = await res.json();
+
+            console.log(data);
+            const dbContainer = document.getElementById('db-container');
+
+            dbContainer.innerHTML += JSON.stringify(data, null, 2);
+        };
+
+        getPowerReport();
+        getAttendance();
+
+        //---Adding User Functionality
+        const form = document.getElementById("reg-form");
+        form.addEventListener("submit", registerUser);
+
+        async function registerUser(event) {
+        event.preventDefault();
+
+        const userEmail = document.getElementById("user-email").value;
+        const role = document.getElementById("user-role").value;
+        const password = document.getElementById("password").value;
+        
+        
+        const result = await fetch("/api/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userEmail,
+                role,
+                password  
+            })
+        }).then((res) => res.json());
+        console.log('result');
+
+        if(result.status === 'ok') {
+            console.log('Adding User to database: ', result.data);
+            alert('User created successfully');
+        }else{
+            alert(result.error);
+        }
+    };
+
+    //Popup registration form functionality
+    function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+    }   
+    
+
+    //@ Desc: Pagination functionality
+    let section = document.getElementById("buttons");
+
+    let buttons = {
+        first: { label: '1', url: "http://localhost3001/power?page=1&limit=2"},
+        second: { label: '2', url: "http://localhost3001/power?page=2&limit=2"},
+        third: { label: '3', url: "http://localhost3001/power?page=3&limit=2"},
+        next: { label: 'Next', url: "http://localhost3001/power?page=4&limit=2"},
+    };
+    for(let id in buttons){
+        let url = buttons[id]["url"];
+        let button = document.createElement("button");
+
+        let label = document.createTextNode(buttons[id]["label"]);
+        // Put onclick functionalities here! (id, url)
+
+        button.appendChild(label);
+        section.appendChild(button);
+    }
+    </script>
+</body>
+</html>

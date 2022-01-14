@@ -1,0 +1,197 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body{
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+   
+}
+.form-container{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    height: 100%;
+    width: 60%;
+    background: #f7f7f7;
+    margin: 0 auto;
+   
+}
+.form-header{
+        background-color: #03787c;
+        height: 180px;
+        border: 1px dashed #fff;
+        line-height: 60px;
+}
+.form-header h1{
+        color: #fff;
+        margin-left: 50px;
+        margin-top: 30px;
+        letter-spacing: 1px;
+        font-size: 30px;
+        font-weight: 500;
+    }
+    .form-header h3{
+        color: #fff;
+        margin-left: 50px;
+        line-height: 30px;
+        font-size: 14px;
+    }
+    .form-header h3 span{
+        color:#f5f5f5;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }.form{
+        line-height: 55px;
+        height: auto;
+    }
+    .form span{ 
+        color: #ec0808; 
+        font-size: 18px;
+        margin-left: 5px;
+    }
+    .form em{
+        margin-left: 8px;
+        font-style: normal;
+        font-family: 600;
+    }
+    .form p{
+        color: #777;
+        font-weight: 500;
+        margin-left: 50px;
+    }
+    .form input[type="text"]{
+        width: 85%;
+        height: 35px;
+        border: 1px solid rgb(199, 193, 193);
+        border-radius: 5px;
+        margin-left: 60px;
+        line-height: 50px;
+    }
+    .form input[type="month"]{
+        width: 42%;
+        height: 35px;
+        margin-left: 60px;
+    }
+    .form fieldset{
+        border: 1px dashed #777;
+        height: auto;   
+    }
+    
+    .form legend{
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        text-decoration: underline;
+        color: #1A2E43;
+    }
+    .form label{
+        font-size: 14px;
+        letter-spacing: 1px;        
+        margin-left: 50px;
+        line-height: 5px;
+        margin-top: 5px;
+    }
+    .form h4{
+        margin-left: 65px;
+         bottom: 5px;
+        line-height: 40px;
+        font-weight: 500;
+        color: #777;
+        font-size: 14px;
+    }
+    .form #btn-submit{
+        padding: 8px 10px;
+        background-color: #0ccf0c;
+        color: #fff;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 80%;
+    }
+    .form #btn-submit:hover{
+       background-color: #f3d137;
+    }
+    .form input[type="radio"]{
+        display:block;
+        margin-left: 60px;
+        /*transform: translateY(50%);--*/
+    }
+    input[type="button"]{
+        padding: 10px;
+    }
+    .form-footer{
+        display: flex;
+        flex-direction: row;
+        margin-top: 120px;
+        padding: 10px;
+    }
+    
+    .form-footer input[type="button"]{
+        background-color: #03787c;
+        width: 180px;
+        height: 40px;
+        color: #fff;
+        margin-left: 50px;
+        border: none;
+        font-size: 16px;
+        transition: 0.2s;
+        border-radius: 4px;
+    }
+    .form-footer input[type="button"]:hover{
+        background-color: #dd923d;  
+    }
+    .form-footer input[type="button"]:focus{
+        transform: translateY(1px);
+    }
+    .footer-btn{
+        flex: 1;
+    }
+    .footer-progressbar{
+        background-color: #dce6d6;
+        width: 80%;
+        height: 40px;
+        flex: 1;
+        margin-right: 60px;
+        border-radius: 4px;
+    }
+    .label{
+        line-height: 30px;
+        position:absolute;
+    }
+    .label label{
+        height: 50px;
+        position: relative;
+        padding: 0 2px;
+    }
+    .label h4{
+        line-height: 0;  
+        margin-left: 85px;  
+    }
+    .footer-info{
+        width: 60%;
+        height: 140px;
+        background-color: #eef5f1;
+        margin: 0 auto;
+        margin-top: 20px;  
+        bottom: -50px;
+        border: 1px dashed rgb(92, 90, 90);
+    }
+    
+    .footer-info p{
+        font-size: 12px;
+        text-align: left;
+        overflow-wrap: break-word;
+        line-height: 20px; 
+        margin:auto 6%;
+      
+    }
+    .footer-info a{
+        text-decoration: underline;
+    }
+    .footer-info a:hover{
+        color: #fa3f27;
+    }

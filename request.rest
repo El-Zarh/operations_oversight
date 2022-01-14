@@ -1,0 +1,4 @@
+GET http://localhost:3001/power?page=3&limit=2
+
+
+

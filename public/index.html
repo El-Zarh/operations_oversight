@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Central Operation</title>
+        <link rel="shortcut icon" href="/images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css">
+        <script src="./scripts/login.js" async></script>
+        <script src="./scripts/main.js" async></script>
+        
+  <style>
+       
+         #admin-btn{ background-color: #fce305e8; color: #000;}
+        .form-popup { max-width: 350px; padding: 10px; background: none; left: 30%; top: 20%; z-index: 9;  
+         border-radius: 5px; display: none; position: absolute;}
+        .user-login-form { width: 420px; padding: 10px; background:#f4f6fd; border-radius: 10px; position: absolute;
+          top: 25%; right: 30px;}
+        .user-login-form label, .form-popup label { font-size: 14px; color: #555;}
+        .user-login-form input[type=text], .user-login-form input[type=password] { width: 100%; height: 40px; margin: 5px 0 22px 0;
+         background: #d6d3d3; border: 1px solid #cecaca; outline: none;}
+        .form-popup input[type=text], .form-popup input[type=password] { width: 100%; height: 40px; margin: 5px 0 22px 0;
+         background: #b4b2b2; border: 1px solid #cecaca;}
+        .form-popup h1, .user-login-form h1{ text-align: center; font-size: 16px; color: #555;}
+        .form-popup input[type=text]:focus, .form-container input[type=password]:focus {background-color: #ddd;
+         outline: none;}
+        .form-popup .btn, .user-login-form .btn{ background-color: #04a96d; color: #fff; padding: 16px 20px; border: none; cursor: pointer;
+         width: 100%; margin-bottom:10px; opacity: 0.8; font-size: 15px; box-shadow: -3px -3px 7px #cac9c9cc,
+         3px 3px 5px rgba(94, 104, 121, 0.342); text-align: center;}
+        .form-popup .register, .user-login-form .login{ height: 45px; border-radius: 5px; }
+        .form-popup .cancel { background-color: #ff0000; border-radius: 5px; height: 45px; box-shadow: -3px -3px 7px #cac9c9cc,
+         3px 3px 5px rgba(94, 104, 121, 0.342);}
+        .form-popup .btn:hover, .open-button:hover { opacity: 1;}
+  </style>
+</head>
+<body>
+        
+        <div class="wrapper">
+            <div class="lhs">
+              <div id ="top-section">
+               
+                <div class ="slideshow">
+                    <div class ="slideshow-item">
+                        <img src ="./assets/slides/image1.jpg">
+                        <div class ="slideshow-item-text">
+                            <h5>Lorem ipsum dolor sit amet.</h5>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, exercitationem?</p>
+                        </div>
+                    </div>
+                    <div class ="slideshow-item">
+                        <img src ="./assets/slides/image2.jpg">
+                        <div class ="slideshow-item-text">
+                            <h5>Lorem ipsum dolor sit amet.</h5>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, exercitationem?</p>
+                        </div>
+                    </div>
+                    <div class ="slideshow-item">
+                        <img src ="./assets/slides/image3.jpg">
+                        <div class ="slideshow-item-text">
+                            <h5>Lorem ipsum dolor sit amet.</h5>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, exercitationem?</p>
+                        </div>
+                    </div>
+                    <div class ="slideshow-item">
+                        <img src ="./assets/slides/image4.jpg">
+                        <div class ="slideshow-item-text">
+                            <h5>Lorem ipsum dolor sit amet.</h5>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, exercitationem?</p>
+                        </div>
+                    </div>
+                </div>     
+              </div>
+            </div>
+        
+            <div class="rhs">
+               <div class = "rhs-top-section">
+                    <div class="rhs__header">
+                        <a href ="https://alphamead.com"><img class="client-logo" src="./assets/logos/logotrans.png" alt="comp-logo"></a>       
+                    </div>
+                    <div class = "admin-popup">
+                        <input type = "button" id ="admin-btn" value = "Admin" onclick="openForm();">
+                    </div>
+               </div>
+               
+               <!---------------Begin Mid section of rhs. for Index page------------>
+               <div class = "rhs-mid-section">
+                <div id="login" class="rhs__form">
+                     <div id="title" class="rhs__form__title2"><p><span>Note</span>: Login to access forms!</p></div> 
+                </div>
+ 
+                 <div class="user-login-form" id="myForm-login">
+                     <form id ="login-form">
+                         <h1>User Login</h1>
+                     
+                         <label for="email"><b>Email</b></label>
+                         <input type="text" placeholder="Enter Email"id ="user-email" name="email" required>
+                     
+                         <label for="psw"><b>Password</b></label>
+                         <input type="password" placeholder="Enter Password" id= "password" name="password" required>
+                         <br>
+                         <input type="submit" value ="Login" class="btn login">
+                       </form>
+
+                     <div id="title" class="rhs__form__title"><a href = "#">Forgot Password?</a></div>
+                 </div>
+               </div>
+                 <!---------------End of rhs Mid section for index page-------------->
+
+                        <!---------Begin rhs bottom section for index page ----------->
+                <div class = "rhs-bottom-section">
+                    <div class="rhs__footer">
+                    <p>For every minute spent in organizing, an hour is earned. <span>(Benjamin Franklin)</span></p>
+                    </div>
+                </div>  
+
+
+                <div class="form-popup" id="myForm">
+                    <form class="form-container" id ="admin-form">
+                      <h1>Admin Login</h1>
+                  
+                      <label for="email"><b>Email</b></label>
+                      <input type="text" placeholder="Enter Email"id ="admin-email" name="email" required>
+                  
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" id= "admin-password" name="password" required>
+                  
+                      <input type="submit" value ="Login" class="btn register">
+                      <input type="button" value ="Close" class="btn cancel" onclick="closeForm()">
+                    </form>
+                  </div>     
+            </div>
+        </div>    
+        
+     <script>
+
+        const form = document.getElementById('login-form');
+        const adminForm = document.getElementById('admin-form')
+        form.addEventListener('submit', userLogin);
+        adminForm.addEventListener('submit', adminLogin);
+
+        async function userLogin(event) {
+            event.preventDefault();
+
+            const userEmail = document.getElementById('user-email').value;
+            const password = document.getElementById('password').value;
+           
+            const result = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userEmail,
+                    password,
+                    
+                })
+            }).then((res) => res.json());
+            console.log('result');
+
+            if(result.status === 'ok') {
+                alert('Retrieving data: ', result.data);
+               // alert('Data retrieval successful');
+               location.assign('../dashboard.html');
+            }else{
+                alert(result.error);
+            }
+        }  
+
+
+        async function adminLogin(event) {
+            event.preventDefault();
+
+            const userEmail = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+           
+            const result = await fetch('/api/admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userEmail,
+                    password,
+                  
+                })
+            }).then((res) => res.json());
+            console.log('result');
+
+            if(result.status === 'ok') {
+                alert('Retrieving data: ', result.data);
+               // alert('Data retrieval successful');
+               location.assign('../admin.html');
+              
+            }else{
+                alert(result.error);
+            }
+        }  
+
+        //Popup registration form functionality
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+            }
+            function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+            }    
+    </script>  
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen_report Form</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/forms.css"> 
+    <script src="../public/scripts/main.js" async></script>
+</head>
+<body>
+    <div class ="form-container">
+        <div class ="form-header">
+            <h1>Monthly Power Report</h1>
+            <h3><span>AMF</span> Site Operations</h3>
+        </div>
+        <div class ="form">
+            <p>&ast;Required</p>
+          <form id ="gen-report">
+              <fieldset>
+                <legend>General Information</legend>
+                <h4>Site & Generator Details</h4>
+                <label for ="location"><em>1.</em>Name/Location of Facility/Site</label>
+                <input type ="text" id ="location" name ="location" placeholder="Enter your answer">
+                <label for ="manager"><em>2.</em>Facility/Site Manager</label>
+                <input type ="text" id ="manager" name ="manager" placeholder="Enter your answer">
+                <label for ="month"><em>3.</em>Reporting Month</label><br>
+                <input type ="month" id ="month" name = "month" min = "2022-01" value = "2022-01"><br>
+                <label for ="capacity1"><em>4.</em>Capacity/Rating (Generator-1)</label>
+                <input type ="text" id ="capacity1" name ="capacity1" placeholder="Enter your answer">
+                <label for ="usage"><em>5.</em>Month Usage/Hours (Generator-1)</label>
+                <input type ="text" id ="usage1" name ="usage1" placeholder="Enter your answer">
+                <label for ="runtime1"><em>6.</em>Present Running Hours (Generator-1)</label>
+                <input type ="text" id ="runtime1" name ="runtime1" placeholder="Enter your answer">
+                <label for ="capacity2"><em>7.</em>Capacity/Rating (Generator-2)</label>
+                <input type ="text" id ="capacity2" name ="capacity2" placeholder="Enter your answer">
+                <label for ="usage2"><em>8.</em>Month Usage/Hours (Generator-2)</label>
+                <input type ="text" id ="usage2" name ="usage2" placeholder="Enter your answer">
+                <label for ="runtime2"><em>9.</em>Present Running Hour (Generator-2)</label>
+                <input type ="text" id ="runtime2" name ="runtime2" placeholder="Enter your answer">     
+                
+                <label for ="third-gen-option"><em>10.</em>Do you have  third Generator?</label><br>
+                <input type = "radio" name = "third-gen-option" id ="rd1" value ="yes">
+                <label for = "third-gen-option"><em>Yes</em></label>
+                <input type = "radio" name = "third-gen-option" id ="rd2" value ="no"> 
+                <label for = "third-gen-option"><em>No</em></label>
+                <input type = "submit" value = "Submit Form" id ="btn-submit">
+               </fieldset>            
+               </form> 
+
+                  <div class ="form-footer">
+                    <div class ="footer-btn">
+                        <input type ="button" name ="next" value ="Next">
+                    </div>
+                    <div class ="footer-progressbar">
+                        
+                    </div>
+                </div>      
+            </div>       
+        </div>
+        
+    <div class ="footer-info">
+        <p>  This content is created by the owner of the form. The data you submit will be sent to the form owner. Microsoft is not responsible for the privacy or security practices of its customers, including those of this form owner.
+             Never give out your password.<br>Powered by Microsoft Forms | The owner of this form has not provided a privacy statement as to how they will use your response data. 
+             Do not provide personal or sensitive information. <br> <a href ="#">Terms of use</a></p>
+    </div>
+    
+  
+  <script>
+      const form = document.getElementById('gen-report');
+      form.addEventListener('submit', sendReport);
+
+     const sendReport =  async(event) =>{
+          event.preventDefault();
+
+          const location = document.getElementById('location').value;
+          const manager = document.getElementById('manager').value;
+          const month = document.getElementById('month').value;
+          const capacity1 = document.getElementById('capacity1').value;
+          const usage1 = document.getElementById('usage1').value;
+          const runtime1 = document.getElementById('runtime1').value;
+          const capacity2 = document.getElementById('capacity2').value;
+          const usage2 = document.getElementById('usage2').value;
+          const runtime2 = document.getElementById('runtime2').value;
+          const choice = document.getElementById('choice').value;
+
+          const result = await fetch('/api/power', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  location,
+                  manager,
+                  month,
+                  capacity1,
+                  usage1,
+                  runtime1,
+                  capacity2,
+                  usage2,
+                  runtime2,
+                  choice
+              })
+          }).then((res) => res.json());
+          console.log(result);
+      }
+
+    /*--function thirdGen(){
+        let rd1 = document.getElementById("rd1");  
+        let rd2 = document.getElementById("rd2");
+
+        if (rd1.checked == true)
+        alert("The option selected is: "+rd1.value);
+        else if(rd2.checked == true)
+        alert("The option selected is: "+rd2.value);
+        else
+        alert("No Option selected");
+}--*/
+     
+  </script>
+</body>
+</html>

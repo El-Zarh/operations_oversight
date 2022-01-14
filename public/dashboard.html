@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Page</title>
+
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    body{
+        font-family: 'Rubik', sans-serif;
+        box-sizing: border-box;
+       
+    }
+    
+    .popup-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 60%;
+        height: 750px;
+        margin: 0 auto;
+        background-color: #dbe2eb;
+        gap: 10px;
+        box-sizing: border-box;
+       
+    }
+    
+    .popup-header{
+        display: inherit;
+        width: 100%;
+        height: 50px;
+        background-color: rgb(117, 117, 117);
+    }
+    .popup-header h3{
+        flex: 1;
+        margin-right: 10px;
+        flex-basis: 40%;
+        color: #fff;
+        font-weight: 500;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+    .popup-header #send-report{
+        flex: 1;
+        flex-basis: 20%;
+    }
+    .popup-header input[type="button"]{
+        background-color: #85bf31;
+        padding: 8px 2px;
+        font-size: 12px;
+        cursor: pointer;
+        color: #fff;
+    }
+    .report{
+        height: 280px;
+        display: inherit;
+        margin-left: 100px;
+
+    }
+    .report h3{
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        line-height: 30px;
+    }  
+    .report select{
+       width: 100%;
+       height: 35px;
+       margin-top: 30px;
+       background: linear-gradient(#ddd, #ffffff);
+    }
+    .report input[type="file"]{
+        height: 120px;
+        width: 200px;
+        background-color: #fff;
+        margin-left: 32%;
+        margin-top: 20px;
+    }
+    .report label{
+        color: navy;
+        margin-top: -50px!important;
+        line-height: 2px;
+    }
+    
+    form{
+        background-color: #f8f6f6;
+        padding: 10px;
+        margin-right: 20%;
+    }
+    fieldset{
+        border: none;
+    }
+    .select-fields{
+        display: flex;
+    }
+    .names{
+        display: flex;
+        
+    }
+    .first-name, .last-name{
+        flex: 1;
+    }
+    .first-name{
+        margin-right: 5px;
+    }
+    .report-form form{
+        margin-left: 15%;
+    }
+    #bottom-form input[type="text"],
+    #bottom-form input[type="email"],
+    #bottom-form input[type="phone"]{
+        width: 100%;
+        height: 30px;
+    }
+    .report-form{
+        bottom: -15%;
+       
+        width: 100%;
+        margin: 0 auto;
+    }
+    .description{
+        text-align: center;
+    }
+    .description textarea{
+        margin-right: 40px;
+    }
+    
+</style>
+</head>
+<body>
+     <div class ="popup-container">
+         <div class ="popup-header">
+            <h3>New Report</h3>
+            <input type ="button" id ="send-report" name ="sendReportBtn" value ="SEND REPORT" onclick="sendReport()">
+         </div>
+         <hr>
+         <div class ="report">
+            <form id ="top-form">
+                <h3>Report</h3>
+             <div class ="select-fields">
+                  <div class ="add-report">
+                    <label for ="add-report">Categories</label>
+                    <select name ="report" id ="choose-category">
+                        <option value="">---------------------------select--------------------</option>
+                        <option value="ops">Osborne Towers</option>
+                        <option value="pow">Centre Height</option>
+                        <option value="hse">GMDs House</option>
+                        <option value="atd">Victoria Place</option>
+                        <option value="srm">Victoria Heights Apartment</option>
+                        <option value="opsexp">Treasure Garden</option>
+                        <option value="critsyst">Quay Cadwell</option>
+                    </select>
+                  </div>
+                  <div class ="submit-report">
+                    <label for ="add-report">Sub-Categories</label>
+                    <select name ="report" id ="choose-subcategory">
+                        <option value="">-------------------------select------------------------</option>
+                        <option value="ops">Osborne Towers</option>
+                        <option value="pow">Centre Height</option>
+                        <option value="hse">GMDs House</option>
+                        <option value="atd">Victoria Place</option>
+                        <option value="srm">Victoria Heights Apartment</option>
+                        <option value="opsexp">Treasure Garden</option>
+                        <option value="critsyst">Quay Cadwell</option>
+                    </select>
+                  </div>      
+             </div>    
+             <input type ="file" name ="attatchment" placeholder="+ Add file">  
+            </form>
+             
+        </div>
+        <hr>
+        <div class ="description">
+               <fieldset>
+                   <legend>
+                    <textarea id ="additional-info" name="additional-info" rows="10" cols="40">
+
+                    </textarea>
+                   </legend>
+               </fieldset>
+              
+        </div>
+        <hr>
+        <div class ="report-form">
+            <form id ="bottom-form">
+                <fieldset>
+                    <legend>
+                        <div class ="names">
+                            <div class ="first-name">
+                                <label for ="first-name">First Name</label>
+                                <input type ="text" name ="first-name" placeholder="First Name" required>
+                            </div>
+                            <div class ="last-name">
+                                <label for ="last-name">Last Name</label>
+                             <input type ="text" name ="last-name" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <label for ="email">Email</label>
+                        <input type="email" name ="email" placeholder="Enter email" required>
+         
+                        <label for ="phone">Phone</label>
+                        <input type ="phone" name ="phone" placeholder="Phone number">
+                    </legend>
+                    
+                </fieldset>    
+            </form>         
+        </div>
+     </div>  
+
+     <script>
+         document.getElementById("sendReportBtn").addEventListener("click", myFunction);
+
+         function sendReport() {
+         window.location.href="http://localhost:3001/power.html";
+         }
+     </script>
+</body>
+</html>
