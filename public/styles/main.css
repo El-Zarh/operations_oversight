@@ -70,7 +70,8 @@ html {
     margin-left: 10px;
   }
   .rhs-top-section{
-    background: linear-gradient(#84fab0, #8fd3f4);
+    /* background: linear-gradient(#84fab0, #8fd3f4); */
+    background: #fff;
     top: 0;
     height: 150px;
   }
