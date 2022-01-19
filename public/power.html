@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gen_report Form</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="./styles/forms.css"> 
-    <script src="../public/scripts/main.js" async></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/forms.css">   
 </head>
 <body>
     <div class ="form-container">
@@ -17,7 +16,7 @@
         <div class ="form">
             <p>&ast;Required</p>
           <form id ="gen-report">
-              <fieldset>
+              
                 <legend>General Information</legend>
                 <h4>Site & Generator Details</h4>
                 <label for ="location"><em>1.</em>Name/Location of Facility/Site</label>
@@ -40,12 +39,12 @@
                 <input type ="text" id ="runtime2" name ="runtime2" placeholder="Enter your answer">     
                 
                 <label for ="third-gen-option"><em>10.</em>Do you have  third Generator?</label><br>
-                <input type = "radio" name = "third-gen-option" id ="rd1" value ="yes">
-                <label for = "third-gen-option"><em>Yes</em></label>
-                <input type = "radio" name = "third-gen-option" id ="rd2" value ="no"> 
-                <label for = "third-gen-option"><em>No</em></label>
-                <input type = "submit" value = "Submit Form" id ="btn-submit">
-               </fieldset>            
+                <input type="radio" name="thirdgen" value="yes" id="third-gen-option"> 
+                <label for="choice-yes">Yes</label>
+                <input type="radio" name="thirdgen" value="no" id="third-gen-option">
+                <label for="choice-no">No</label>
+
+                <input type = "submit" value = "Submit Form" id ="btn-submit">          
                </form> 
 
                   <div class ="form-footer">
@@ -68,10 +67,11 @@
   
   <script>
       const form = document.getElementById('gen-report');
-      form.addEventListener('submit', sendReport);
 
-     const sendReport =  async(event) =>{
-          event.preventDefault();
+        form.addEventListener('submit', sendReport);
+
+        async function sendReport(event){
+            event.preventDefault();
 
           const location = document.getElementById('location').value;
           const manager = document.getElementById('manager').value;
@@ -82,7 +82,7 @@
           const capacity2 = document.getElementById('capacity2').value;
           const usage2 = document.getElementById('usage2').value;
           const runtime2 = document.getElementById('runtime2').value;
-          const choice = document.getElementById('choice').value;
+          const genOption = document.getElementById('rb').value;
 
           const result = await fetch('/api/power', {
               method: 'POST',
@@ -99,15 +99,15 @@
                   capacity2,
                   usage2,
                   runtime2,
-                  choice
+                  genOption
               })
           }).then((res) => res.json());
           console.log(result);
       }
 
-    /*--function thirdGen(){
-        let rd1 = document.getElementById("rd1");  
-        let rd2 = document.getElementById("rd2");
+    function thirdGen(){
+        let rd1 = document.getElementById("third-gen-option");  
+        let rd2 = document.getElementById("third-gen-option");
 
         if (rd1.checked == true)
         alert("The option selected is: "+rd1.value);
@@ -115,8 +115,8 @@
         alert("The option selected is: "+rd2.value);
         else
         alert("No Option selected");
-}--*/
-     
+    }
+    
   </script>
 </body>
 </html>

@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+.left{
+    flex: 1;
+    background: #499a06;
+}
+
+.right{
+    flex: 4;
+}
+
+.navbar{
+    height: 60px;
+    width: 100%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: end;
+    background: #eee;
+}
+
+.detail{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.userImg{
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.username{
+    font-size: 14px;
+    font-weight: 400;
+}

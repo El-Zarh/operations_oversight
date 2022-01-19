@@ -1,24 +1,14 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body{
-    font-family: 'Rubik', sans-serif;
-    color: #000;
-    box-sizing: border-box;
-}
 *,
 *::after,
 *::before {
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 html {
     /* font-size: 62.5%; */
     font-size: 52.5%;
-    font-family: "Open Sans",sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 /*--:root {
     --primary-color: #1A2E43;
@@ -188,6 +178,7 @@ html {
     height: 100px;
     margin-left: 35%;
   }
+
   input[type="submit"]{
     box-shadow: 0 2px 11px 0 #00000024, 0 10px 16px -8px #0000004f;
     width: 280px;
@@ -205,16 +196,17 @@ html {
     padding: 0 8px;
     background-color:#05e223;;
   }
+
   input[type="submit"]:hover{
     background: #f3d008;
     color: #000;
   }
+
   input[type="submit"]:focus{
     border: 1px solid #3a3a3a;
     transform: translateY(1px);
   }
-  
-  
+
   .rhs__footer{
     font-size: 14px;
     background: #d3dd18;
@@ -222,8 +214,8 @@ html {
     margin-top: 10px;
     height: 80px;
     text-align: center;
-   
   }
+
   .rhs__footer span{
     color: #0e48f7;
     margin: 12%;
@@ -247,7 +239,6 @@ html {
   }
   .rhs__form span{
     color: #0e48f7;
-    
   }
   .rhs__form .register{
     margin-left: 30px;
@@ -401,9 +392,6 @@ input[type="button"]:hover{
     transform: translateY(1px);
 }
 
-
-
-
 form{
   background-color: #f8f6f6;
   padding: 10px;
@@ -446,6 +434,8 @@ fieldset{
 .description textarea{
   margin-right: 40px;
 }
+
+
 
 /*------Mobile Responsiveness-----*/
 @media only screen and (max-width:767px){

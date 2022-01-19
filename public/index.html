@@ -6,12 +6,11 @@
         <title>Central Operation</title>
         <link rel="shortcut icon" href="/images/favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css">
-        <script src="./scripts/login.js" async></script>
-        <script src="./scripts/main.js" async></script>
-        
+        <link rel="stylesheet" type="text/css" media="screen" href="./assets/styles/main.css">  
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet"> 
+        <script src="https://kit.fontawesome.com/6ad6feb883.js" crossorigin="anonymous"></script>
   <style>
        
          #admin-btn{ background-color: #fce305e8; color: #000;}
@@ -96,10 +95,10 @@
                          <h1>User Login</h1>
                      
                          <label for="email"><b>Email</b></label>
-                         <input type="text" placeholder="Enter Email"id ="user-email" name="email" required>
+                         <input type="text" placeholder="Enter Email"id ="user-email" name="email" required />
                      
                          <label for="psw"><b>Password</b></label>
-                         <input type="password" placeholder="Enter Password" id= "password" name="password" required>
+                         <input type="password" placeholder="Enter Password" id= "password" name="password" required />
                          <br>
                          <input type="submit" value ="Login" class="btn login">
                        </form>
@@ -133,7 +132,9 @@
                   </div>     
             </div>
         </div>    
-        
+    
+      <script src="./scripts/login.js"></script>
+      <script src="./scripts/main.js"></script>
      <script>
 
         const form = document.getElementById('login-form');
@@ -176,7 +177,7 @@
             const userEmail = document.getElementById('admin-email').value;
             const password = document.getElementById('admin-password').value;
            
-            const result = await fetch('/api/admin', {
+            const result = await fetch('/api/admin_login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

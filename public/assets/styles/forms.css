@@ -17,12 +17,12 @@ body{
     width: 60%;
     background: #f7f7f7;
     margin: 0 auto;
-   
+    border: 2px solid #c9c6c6;
 }
 .form-header{
         background-color: #03787c;
         height: 180px;
-        border: 1px dashed #fff;
+       
         line-height: 60px;
 }
 .form-header h1{

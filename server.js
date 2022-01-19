@@ -3,45 +3,46 @@ const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
-
-
-//const coockieParser = require("cookie-parser");
-const fs = require('fs').promises;
+//const { authAdmin, authUser } = require("./middlewares/auth");
+const coockieParser = require("cookie-parser");
 //const mongoose = require("mongoose");
 
-const { createPDF } = require("./config/pdf");
 const cors = require("cors");
 
 const { Generator, Attendance, User } = require("./models/models");
 const connectDB = require("./config/mongodb");
 //const { allowLoggedInUser, grantAccess } = require("./authenticate/auth");
 const jwt = require("jsonwebtoken");
-//const { buildPDF }  = require("./config/pdf");
 
 const cookieParser = require("cookie-parser");
-//const { resourceLimits } = require("worker_threads");
+const { resourceLimits } = require("worker_threads");
 
 const JWT_SECRET = 'fusaky32sr76asljnla@jbjsdn#jndnskln!k2s';
 
-dotenv.config({ path: "./config/config.env" }); //Load config variables
+dotenv.config({ path: "./config/config.env" }); 
 
-connectDB() // connect to MongoDB
+connectDB();
 
-const app = express(); //Initialize the application
+const app = express(); 
+
+
 
 //app.set('view engine', 'ejs');
 //@ Desc: Use static folder
 app.use("/", express.static(path.join(__dirname, "public"))); 
 //app.use(express.static(__dirname + "/public/dashboard.html"));
 app.use(cookieParser());
-app.use(bodyParser.json()); //Body Parser
-//app.use(setUser);
-//app.use(allowLoggedInUser);
-//app.use(grantAccess);
-app.use(cors()); //use cors
+app.use(bodyParser.json());
 
+
+app.use(cors()); 
+
+
+app.get('/login', async(req, res) => {
+    res.sendFile('dashborad.html');
+})
 // @ Desc: Admin GET Attendance report with Pagination functinality
-app.get('/attendance', async(req,res) => {
+/*--app.get('/attendancead', authAdmin, async(req,res) => {
     try{
         const { page, perPage} = req.query;
         const options = {
@@ -55,11 +56,10 @@ app.get('/attendance', async(req,res) => {
         console.error(err);
         return res.status(500).json(err);
     } 
-})
+})--*/
 
 // @ Desc: Admin GET Power report with Pagination functinality 
-app.get('/power', async (req, res) => {
-      
+app.get('/power', async (req, res) => {     
     try{
         
         const { page, perPage} = req.query;
@@ -79,7 +79,7 @@ app.get('/power', async (req, res) => {
 // @ Desc: User Generator report submission/post  request route
 app.post('/api/power', async(req, res) => {
 
-    const { location, manager, month, capacity1, usage1, runtime1, capacity2, usage2, runtime2, choice } = req.body;
+    const { location, manager, month, capacity1, usage1, runtime1, capacity2, usage2, runtime2, genOption } = req.body;
 
     try{
         const results = await Generator.create({
@@ -92,7 +92,7 @@ app.post('/api/power', async(req, res) => {
             capacity2,
             usage2,
             runtime2,
-            choice
+            genOption
         })
         console.log('Report Submitted Successfully to Database!: ', results);
         
@@ -102,7 +102,7 @@ app.post('/api/power', async(req, res) => {
         }
         throw error;
     }
-        res.json({ status: 'successful' })      
+        res.json({ status: 'successful' }); 
 })
 
 // @Desc: User submision/post route for Staff Attendance Report 
@@ -129,8 +129,8 @@ app.post('/api/attendance', async(req, res) => {
 })
 
 //@ Desc: Admin POST/ Login request to access admin page tackle tomorrow
-app.post('/api/admin', async(req, res) => {
-    const { userEmail, password, role } = req.body;
+app.post('/api/admin_login', async(req, res) => {
+    const { userEmail, password } = req.body;
 
     const user = await User.findOne({ userEmail }).lean();
     
@@ -149,7 +149,7 @@ app.post('/api/admin', async(req, res) => {
         )       
         return res.json({ status: 'ok', data: token });
         //console.log("You have successfully logged in"); 
-        //res.sendFile("/dashboard.html");         
+               
     }
         return res.json({ status: 'error', error: 'Invalid user-password'});     
 });
@@ -212,14 +212,6 @@ app.post('/api/register', async(req, res) =>{
     }
     res.json({ status: 'ok' })
 });
-
-/*--function setUser(req, res, next) {
-    const userId = req.body.userId;
-    if(userId){
-        req.user = users.find(user => user.id === userId)
-    }
-    next();  
-}--*/
 
 // @ Desc: Port runnin server 
 const PORT = process.env.PORT || 3001;

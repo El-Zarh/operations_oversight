@@ -7,23 +7,28 @@
     <title>Central Operation Admin</title>
 
     <style>   
-        body{ margin: 0; top: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        body{ margin: 0; top: 0; padding: 0; font-family: 'Courier New', Courier, monospace;  box-sizing: border-box;}
         .admin-container{ max-width: 1300px; height: auto; display: flex; box-sizing: border-box; flex-direction: column;
         margin: auto;  background: none; position: relative;}
-        .top-nav{ width: 100%; height: 50px; background-color: #333; border-radius: 5px; position: absolute;}
-        .row{ display: flex; width: 100%; align-items: center; flex-wrap: wrap; justify-content: space-around; background: 
-            linear-gradient(#363945, #3d3e41); margin-top: 60px; border-radius: 5px; position: absolute;}
+       /*-- .top-nav{ width: 100%; height: 50px; background-color: #333; border-radius: 5px; position: absolute;}--*/
+        .row{ display: flex; width: 100%; align-items: center; flex-wrap: wrap; justify-content: space-around; 
+             margin-top: 0px; border-radius: 5px; position: absolute;}
         .col-2{ flex: 1; flex-basis: 60%; max-width: 860px; margin-bottom: 30px; margin-left: 20px; }
+        .col-2 a { color: #900000; font-weight: 600; cursor: pointer; text-decoration: underline;}
         .col-3{ flex: 1; flex-basis: 20%; max-width: 250px;  margin-bottom: 30px; }
         .col-3 #report-call{ flex-direction: column; height: 70%; background-color: #fff; line-height: 50px; 
             border: 1px solid #333; position: absolute; top: 20px;  width: 20%; border-radius: 5px; }
-        .col-3 #admin-tools{ height: 44%; border: 1px solid #333; position: absolute; top: 20px;  width: 18%; 
-            border-radius: 5px; background-color: #fff; line-height: 50px; right: 0;}
+        
+        .col-3 #admin-tools{ height: auto; border: 1px solid #333; position: absolute; top: 20px;  width: 18%; 
+            border-radius: 5px; background-color: #fff; line-height: 50px; right: 0;overflow: hidden;}
         input[type=text], input[type=submit]{ width: 100%; height: 35px;}
         input[type=submit]{ cursor: pointer; outline: none;}
-        
+        .printable-section{ background: #92dce6; height: 100vh; }
+        .generate-pdf-control{ text-align: center;}
+        .generate-pdf-control input[type="button"]{ padding: 6px 8px; background:#fcbb2f; cursor: pointer;
+        border-radius: 5px;}
         #db-container{ max-width: 800px; height: 60%; border-radius: 5px; background-color: #fff; top: 10px;
-             overflow-wrap: break-word; margin-left: 2px;}
+             overflow-wrap: break-word; margin-left: 2px; overflow: scroll;}
         .top-nav{  text-align: right; }
         .top-nav #add-user{ margin-top: 8px; margin-right: 5px; padding: 6px; background-color: #fcbb2f; color: #fff; 
             text-transform: uppercase; cursor: pointer; border-radius: 5px; }
@@ -31,8 +36,8 @@
         .footer-container{ max-width: 1300px; height: 150px; display: flex; box-sizing: border-box; flex-direction: row;
         margin: 55px 25px;  background-color: #333; border-radius: 5px;}
   
-        .form-popup { display: none; position: absolute; top: 20px; margin-left: 41%; border: 3px solid #f1f1f1; z-index: 9;
-        border: none; }
+        .form-popup { display: none; position: absolute; top: 20px;  border: 3px solid #f1f1f1; width: 25%;
+        border: none;}
         .form-container { max-width: 250px; padding: 10px; background-color: #fff; margin-right: 5px; border-radius: 5px; }
         .form-container input[type=text], .form-container input[type=password] { width: 100%; height: 40px; margin: 5px 0 22px 0;
          background: #f1f1f1; border: 1px solid #cecaca;}
@@ -51,18 +56,15 @@
        .col-2 #buttons button{ color: #000; padding: 8px 10px; font-size: 16px;}
        .col-2 #buttons button:hover{ background-color: #d5d5d5}
        .col-2 #buttons button:focus{ background-color: rgb(101, 169, 246);}
-    </style>
-    
+     </style>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+   
 </head>
 <body>
     <div class = "admin-container">
-
-        <div class = "top-nav">
-            
-        </div>
-
+        
         <div class ="row">
-            <div class = "col-3">
+           <!---- <div class = "col-3">
                 <div class ="report-aside" id ="report-call">
                     <div>
                         <input type ="submit" value ="Power Report" onclick ="getPowerReport();">
@@ -90,15 +92,20 @@
                     </div>
                     
                 </div>
-            </div>
+            </div>-->
   <!---------------Begening of Container for displaying data from database----------------->
             <div class = "col-2">
-                <pre 
-                id ="db-container">
+              <div class ="printable-section"  id = "target">
+                <div class ="generate-pdf-control">
+                    <h3>Report Output from <a heref = "#">Database</a></h3>
+                    <button onclick="generatePdf();">Generate PDF</button>
+                </div>
 
-               <!---- <a href = "javascript: prevPage()" id ="btn_prev">Prev</a>
-                <a href = "javascript: nextPage()" id ="btn_next">Next</a>-->
-                </pre>  
+                    <div id ="db-container">
+                        <h3>Submitted Report from Site FM's. <a href ="#">Change Category</a></h3>
+                    </div>     
+              </div>
+               
                 <section id = "buttons"></section>
             </div>
   <!---------------End of Container for displaying data from database--------------------->
@@ -143,13 +150,13 @@
      </div>  
   </div>   
 </div>
-    
+
     <script> 
     /*--Put logic to alternate what is displayed on db container here
     For instance: whether to display power or attendance reports--*/
   
     //Function for getting generator report from database 
-        let getPowerReport = async() => {
+        const getPowerReport = async() => {
             const res = await fetch ('/power');
 
             const data = await res.json();
@@ -160,7 +167,7 @@
             dbContainer.innerHTML += JSON.stringify(data, null, 2);
         };
 
-        let getAttendance = async() => {
+        const getAttendance = async() => {
             const res = await fetch ('/attendance');
 
             const data = await res.json();
@@ -235,6 +242,32 @@
         button.appendChild(label);
         section.appendChild(button);
     }
+
+   /* const doc = new jsPDF();
+    const specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#cmd').click(function () {
+        doc.fromHTML($('#db-container').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('ouput.pdf');
+    });--*/
+
+    function generatePdf(){
+	const element = document.getElementById("db-container");
+
+	htm2pdf()
+	.from(element)
+	.save();
+	
+  }
+ 
+
     </script>
 </body>
 </html>

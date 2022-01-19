@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const mongoosePaginate = require("mongoose-paginate-v2");
 
+
 //@Desc: Generator Report Form Modal Schema
 const generatorSchema = new mongoose.Schema(
     {
@@ -14,8 +15,7 @@ const generatorSchema = new mongoose.Schema(
     capacity2: { type: Number },
     usage2: { type: Number },
     runtime2: { type: Number },
-    choice: { type: String, possibleValues: ['yes', 'no']}
-       
+    genOption: { type: String, possibleValues: ['yes', 'no']}   
 });
 
 //@Desc: Attendance Report Form Modal Schema
